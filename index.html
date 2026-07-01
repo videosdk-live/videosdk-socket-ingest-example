@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VideoSDK Custom Socket Ingestion Example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Custom Socket Ingestion Example</h1>
+    <p>
+      Stream microphone audio into a VideoSDK room over a WebSocket and exchange
+      pub/sub messages.
+      <a href="https://docs.videosdk.live/telephony/connectors/custom-websocket">Docs</a>
+      ·
+      <a href="https://github.com/videosdk-live/videosdk-socket-ingest-example">GitHub</a>
+    </p>
+
+    <p><strong>Status:</strong> <span id="status">Disconnected</span></p>
+
+    <p class="note">
+      Set your token in <code>config.js</code>. This is for local testing only.
+      In production, create the ingest session on your backend and never ship
+      the token to the browser; paste only the <code>wsUrl</code> below.
+    </p>
+
+    <h2>1. Ingest session</h2>
+    <div class="field">
+      <label for="roomId">Room ID</label>
+      <input id="roomId" type="text" placeholder="abcd-efgh-ijkl" />
+    </div>
+    <div class="field">
+      <label for="participantName">Participant name (optional)</label>
+      <input id="participantName" type="text" placeholder="Web Demo" />
+    </div>
+    <button id="btnCreate" type="button">Create session</button>
+    <div class="field">
+      <label for="wsUrl">WebSocket URL</label>
+      <input id="wsUrl" type="text" placeholder="wss://ingest.videosdk.live/videosdk?ref=vs_..." />
+    </div>
+
+    <h2>2. Connect &amp; stream</h2>
+    <button id="btnConnect" type="button">Connect</button>
+    <button id="btnMic" type="button">Start Microphone</button>
+    <button id="btnStop" type="button">Stop &amp; disconnect</button>
+
+    <h2>3. Messaging (pub/sub)</h2>
+    <div class="field">
+      <label for="topic">Topic</label>
+      <input id="topic" type="text" value="CHAT" />
+    </div>
+    <button id="btnSubscribe" type="button">Subscribe</button>
+    <button id="btnUnsubscribe" type="button">Unsubscribe</button>
+    <div class="field">
+      <label for="messageText">Message</label>
+      <input id="messageText" type="text" placeholder="Hello everyone" />
+    </div>
+    <button id="btnPublish" type="button">Publish</button>
+
+    <h2>Log</h2>
+    <div id="log" class="log"></div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
