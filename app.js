@@ -156,7 +156,26 @@ function handleMessage(raw) {
   } else if (msg.event === "message") {
     const d = msg.data || {};
     log(`[${msg.topic}] ${d.senderName || d.senderId || "unknown"}: ${d.message}`, "message");
+  } else if (msg.event === "participant-joined") {
+    logParticipant("joined", msg.participant);
+  } else if (msg.event === "participant-left") {
+    logParticipant("left", msg.participant);
+  } else if (msg.event === "meeting-joined") {
+    log(`Meeting joined. roomId=${msg.roomId}, sessionId=${msg.sessionId}`, "success");
+  } else if (msg.event === "meeting-left") {
+    log(`Meeting ended${msg.message ? ": " + msg.message : ""}.`, "error");
   }
+}
+
+// Log a participant-joined / participant-left event with any metadata.
+function logParticipant(action, participant) {
+  const p = participant || {};
+  const who = p.name || p.id || "unknown";
+  const meta =
+    p.metadata && Object.keys(p.metadata).length
+      ? ` ${JSON.stringify(p.metadata)}`
+      : "";
+  log(`Participant ${action}: ${who}${meta}`, "success");
 }
 
 function stopSession() {

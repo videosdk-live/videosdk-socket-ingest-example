@@ -14,6 +14,8 @@ Guide: [Custom WebSocket](https://docs.videosdk.live/telephony/connectors/custom
 - Capture the microphone, resample to **8 kHz mono PCM16**, and send `media` frames
 - Play room audio received as `media` frames
 - Pub/sub messaging: `subscribe`, `unsubscribe`, `message` (publish), and receiving messages
+- Receive room lifecycle events: `participant-joined` / `participant-left` (with
+  participant `id`, `name`, and `metadata`), and `meeting-joined` / `meeting-left`
 - Send `stop` to end the session
 
 ## Prerequisites
